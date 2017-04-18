@@ -10,5 +10,10 @@ describe Oystercard do
     it 'tests that user can top up oystercard' do
       expect(subject.top_up(5)).to eq 5
     end
+
+    it 'raises an error if the balance is over £90' do
+      card = Oystercard.new
+      expect { card.top_up(90) }.to raise_error "Max balance £90"
+    end
   end
 end
