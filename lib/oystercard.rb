@@ -24,4 +24,8 @@ class Oystercard
     true
   end
 
+  def in_journey?
+    true
+  end
+
 end

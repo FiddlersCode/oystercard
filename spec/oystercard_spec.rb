@@ -40,4 +40,10 @@ describe Oystercard do
     end
   end
 
+  describe "#in_journey" do
+    it "should return true" do
+      expect(subject.in_journey?). to be true
+    end
+  end
+
 end
