@@ -17,21 +17,30 @@ describe Oystercard do
   end
 
   describe "#touch_in " do
+    let(:station){ double(:station) }
     it "should return true" do
-      subject.top_up(2)
-      expect(subject.touch_in).to be true
+      subject.top_up(10)
+      expect(subject.touch_in(station)).to be true
     end
 
     it 'raises an error if the balance is over £90' do
       card2 = Oystercard.new
-      expect {card2.touch_in }.to raise_error "You don't have enough money on your card"
+      expect {card2.touch_in(station) }.to raise_error "You don't have enough money on your card"
     end
+
+    it 'stores the entry station' do
+      subject.top_up(10)
+      subject.touch_in(station)
+      expect(subject.entry_station).to eq station
+    end
+
   end
 
   describe "#touch_out" do
+    let!(:station){ double :station }
     before (:each) {
         subject.top_up(10)
-        subject.touch_in
+        subject.touch_in(station)
     }
     it "should return true" do
     expect(subject.touch_out).to be true
@@ -43,9 +52,10 @@ describe Oystercard do
   end
 
   describe "#in_journey" do
+    let(:station){ double :station }
     it "should return true" do
       subject.top_up(2)
-      subject.touch_in
+      subject.touch_in(station)
       expect(subject.in_journey?). to be true
     end
 
