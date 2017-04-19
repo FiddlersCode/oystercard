@@ -24,8 +24,8 @@ class Oystercard
     true
   end
 
-  def in_journey?
-    true
+  def in_journey?(card)
+    true if card.touch_in == true
   end
 
 end
