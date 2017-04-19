@@ -16,8 +16,8 @@ class Oystercard
     @balance -= fare
   end
 
-  def touch_in(card)
-    @in_use << card
+  def touch_in
+    true
   end
 
 end

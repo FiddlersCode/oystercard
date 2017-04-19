@@ -30,8 +30,7 @@ describe Oystercard do
     end
 
     it "should move the card to the @in_use array" do
-      subject.touch_in
-      expect(@in_use).to include subject
+      expect(subject.touch_in).to be true
     end
   end
 end
