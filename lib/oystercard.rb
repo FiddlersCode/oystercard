@@ -18,13 +18,14 @@ class Oystercard
   end
 
   def touch_in
-    raise RuntimeError, "You don't have enough money on your card" if @balance < MINIMUM_BALANCE
+    fail "You don't have enough money on your card" if @balance < MINIMUM_BALANCE
     @in_journey = true
     true
   end
 
   def touch_out
     @in_journey = false
+    @balance -= 1
     true
   end
 

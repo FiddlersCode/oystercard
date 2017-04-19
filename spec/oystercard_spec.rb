@@ -44,6 +44,12 @@ describe Oystercard do
     it "should return true" do
     expect(subject.touch_out).to be true
     end
+
+    it "deducts correct amount after touch_out" do
+      subject.top_up(10)
+      subject.touch_in
+      expect{ subject.touch_out }.to change{ subject.balance }.by(-1)
+		end
   end
 
   describe "#in_journey" do
@@ -57,6 +63,9 @@ describe Oystercard do
       subject.touch_out
       expect(subject.in_journey?).to be false
     end
+
+
+
   end
 
 end
