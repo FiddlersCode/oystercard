@@ -18,10 +18,6 @@ describe Oystercard do
   end
 
   describe "#touch_in " do
-    it "should respond to touch_in" do
-      expect(subject).to respond_to(:touch_in)
-    end
-
     it "should return true" do
       subject.top_up(2)
       expect(subject.touch_in).to be true
@@ -34,13 +30,15 @@ describe Oystercard do
   end
 
   describe "#touch_out" do
+    before (:each) {
+        subject.top_up(10)
+        subject.touch_in
+    }
     it "should return true" do
     expect(subject.touch_out).to be true
     end
 
     it "deducts correct amount after touch_out" do
-      subject.top_up(10)
-      subject.touch_in
       expect{ subject.touch_out }.to change{ subject.balance }.by(-1)
 		end
   end
