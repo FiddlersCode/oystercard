@@ -38,7 +38,7 @@ describe Oystercard do
     end
 
     it "deducts correct amount after touch_out" do
-      expect{ subject.touch_out }.to change{ subject.balance }.by(-1)
+      expect{ subject.touch_out }.to change{ subject.balance }.by(-Oystercard::MINIMUM_CHARGE)
 		end
   end
 
