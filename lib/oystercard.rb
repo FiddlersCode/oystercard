@@ -4,6 +4,7 @@ class Oystercard
 
   def initialize
     @balance = 0
+    @in_use = []
   end
 
   def top_up(amount)
@@ -15,8 +16,8 @@ class Oystercard
     @balance -= fare
   end
 
-  def touch_in
-
-  end 
+  def touch_in(card)
+    @in_use << card
+  end
 
 end

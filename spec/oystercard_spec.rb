@@ -28,5 +28,10 @@ describe Oystercard do
     it "should respond to touch_in" do
       expect(subject).to respond_to(:touch_in)
     end
+
+    it "should move the card to the @in_use array" do
+      subject.touch_in
+      expect(@in_use).to include subject
+    end
   end
 end
