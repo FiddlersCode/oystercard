@@ -30,7 +30,13 @@ describe Oystercard do
     end
 
     it "should return true" do
+      subject.top_up(2)
       expect(subject.touch_in).to be true
+    end
+
+    it 'raises an error if the balance is over £90' do
+      card2 = Oystercard.new
+      expect {card2.touch_in }.to raise_error "You don't have enough money on your card"
     end
   end
 
@@ -42,6 +48,7 @@ describe Oystercard do
 
   describe "#in_journey" do
     it "should return true" do
+      subject.top_up(2)
       subject.touch_in
       expect(subject.in_journey?). to be true
     end

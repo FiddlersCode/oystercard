@@ -17,6 +17,7 @@ class Oystercard
   end
 
   def touch_in
+    raise RuntimeError, "You don't have enough money on your card" if @balance < 1
     @in_journey = true
     true
   end
