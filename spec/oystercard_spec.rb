@@ -17,13 +17,6 @@ describe Oystercard do
     end
   end
 
-  describe '#deduct' do
-    it 'deducts fare from balance' do
-      subject.top_up(10)
-      expect(subject.deduct(6)).to eq 4
-    end
-  end
-
   describe "#touch_in " do
     it "should respond to touch_in" do
       expect(subject).to respond_to(:touch_in)
