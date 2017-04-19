@@ -23,6 +23,7 @@ class Oystercard
   def touch_out
     @in_journey = false
     @balance -= 1
+    @entry_station = nil
     true
   end
 
