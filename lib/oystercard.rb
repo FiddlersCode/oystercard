@@ -16,7 +16,6 @@ class Oystercard
   def touch_in
     fail "You don't have enough money on your card" if @balance < MINIMUM_BALANCE
     @in_journey = true
-    true
   end
 
   def touch_out

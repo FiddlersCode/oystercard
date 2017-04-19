@@ -7,12 +7,11 @@ describe Oystercard do
 
   end
   describe '#top_up' do
+    subject(:card) {Oystercard.new}
     it 'tests that user can top up oystercard' do
       expect(subject.top_up(5)).to eq 5
     end
-
     it 'raises an error if the balance is over £90' do
-      card = Oystercard.new
       expect { card.top_up(Oystercard::MAX_VALUE + 1) }.to raise_error "Max balance £#{Oystercard::MAX_VALUE}"
     end
   end
@@ -54,9 +53,6 @@ describe Oystercard do
       subject.touch_out
       expect(subject.in_journey?).to be false
     end
-
-
-
   end
 
 end
