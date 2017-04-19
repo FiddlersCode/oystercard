@@ -35,7 +35,7 @@ describe Oystercard do
   end
 
   describe "#touch_out" do
-    it "should return false"do
+    it "should return true" do
     expect(subject.touch_out).to be true
     end
   end
@@ -43,12 +43,12 @@ describe Oystercard do
   describe "#in_journey" do
     it "should return true" do
       subject.touch_in
-      expect(subject.in_journey?(subject)). to be true
+      expect(subject.in_journey?). to be true
     end
 
     it "should return false" do
       subject.touch_out
-      expect(subject.in_journey?(subject)).to be true
+      expect(subject.in_journey?).to be false
     end
   end
 
