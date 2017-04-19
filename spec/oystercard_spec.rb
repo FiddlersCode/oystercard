@@ -50,7 +50,7 @@ describe Oystercard do
       expect{ subject.touch_out }.to change{ subject.balance }.by(-Oystercard::MINIMUM_CHARGE)
 		end
 
-    it "resets the @entry_station to nil" do
+    it "resets the in entry_station to nil" do
       subject.touch_out
       expect(subject.entry_station). to eq nil
     end
