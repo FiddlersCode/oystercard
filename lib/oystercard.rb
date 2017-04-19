@@ -20,4 +20,8 @@ class Oystercard
     true
   end
 
+  def touch_out
+    true
+  end
+
 end

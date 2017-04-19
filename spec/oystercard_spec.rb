@@ -29,8 +29,15 @@ describe Oystercard do
       expect(subject).to respond_to(:touch_in)
     end
 
-    it "should move the card to the @in_use array" do
+    it "should return true" do
       expect(subject.touch_in).to be true
     end
   end
+
+  describe "#touch_out" do
+    it "should return false"do
+    expect(subject.touch_out).to be true
+    end
+  end
+
 end
