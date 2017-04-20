@@ -1,6 +1,9 @@
 require 'oystercard'
 
 describe Oystercard do
+  let(:station) { double :station }
+  let(:exit_station) { double :station }
+
   describe '#balance' do
     it 'tests that an instance of Oystercard has a balance of zero' do
       expect(subject.balance).to eq 0
@@ -18,7 +21,7 @@ describe Oystercard do
   end
 
   describe '#touch_in' do
-    let(:station) { double(:station) }
+    # let(:station) { double(:station) }
     it 'should return true' do
       subject.top_up(10)
       expect(subject.touch_in(station)).to be true
@@ -36,34 +39,34 @@ describe Oystercard do
     end
   end
 
-  describe '#touch_out' do
-    let!(:station) { double :station }
+  context 'subject is touching out' do
     before (:each) {
         subject.top_up(10)
         subject.touch_in(station)
     }
-    it 'should return true' do
-      expect(subject.touch_out(station)).to be true
-    end
+    describe '#touch_out' do
 
-    it 'deducts correct amount after touch_out' do
-      expect { subject.touch_out(station) }.to change { subject.balance }.by(-Oystercard::MINIMUM_CHARGE)
-    end
+      it 'should return true' do
+        expect(subject.touch_out(station)).to be true
+      end
 
-    it 'resets the in entry_station to nil' do
-      subject.touch_out(station)
-      expect(subject.entry_station). to eq nil
-    end
+      it 'deducts correct amount after touch_out' do
+        expect { subject.touch_out(station) }.to change { subject.balance }.by(-Oystercard::MINIMUM_CHARGE)
+      end
 
-    let(:exit_station) { double :station }
-    it 'stores the exit station' do
-      subject.touch_out(station)
-      expect(subject.exit_station).to eq station
+      it 'resets the in entry_station to nil' do
+        subject.touch_out(station)
+        expect(subject.entry_station). to eq nil
+      end
+
+      it 'stores the exit station' do
+        subject.touch_out(station)
+        expect(subject.exit_station).to eq station
+      end
     end
   end
-
   describe '#in_journey' do
-    let(:station) { double :station }
+    # let(:station) { double :station }
     it 'should return true' do
       subject.top_up(2)
       subject.touch_in(station)
