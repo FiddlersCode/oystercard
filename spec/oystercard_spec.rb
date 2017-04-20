@@ -20,29 +20,32 @@ describe Oystercard do
     end
   end
 
-  describe '#touch_in' do
-    # let(:station) { double(:station) }
-    it 'should return true' do
-      subject.top_up(10)
-      expect(subject.touch_in(station)).to be true
-    end
-
-    it 'raises an error if the balance is over £90' do
-      card2 = Oystercard.new
-      expect { card2.touch_in(station) }.to raise_error "You don't have enough money on your card"
-    end
-
-    it 'stores the entry station' do
+  context 'subjecting is touching in' do
+    before {
       subject.top_up(10)
       subject.touch_in(station)
-      expect(subject.entry_station).to eq station
+    }
+    describe '#touch_in' do
+      it 'should return true' do
+        expect(subject.touch_in(station)).to be true
+      end
+
+      it 'raises an error if there is insufficient balance on the card' do
+        card2 = Oystercard.new
+        expect { card2.touch_in(station) }.to raise_error "You don't have enough money on your card"
+      end
+
+      it 'stores the entry station' do
+        expect(subject.entry_station).to eq station
+      end
     end
   end
 
   context 'subject is touching out' do
-    before (:each) {
+    before {
         subject.top_up(10)
         subject.touch_in(station)
+        subject.touch_out(station)
     }
     describe '#touch_out' do
 
@@ -55,27 +58,29 @@ describe Oystercard do
       end
 
       it 'resets the in entry_station to nil' do
-        subject.touch_out(station)
         expect(subject.entry_station). to eq nil
       end
 
       it 'stores the exit station' do
-        subject.touch_out(station)
         expect(subject.exit_station).to eq station
       end
     end
   end
-  describe '#in_journey' do
-    # let(:station) { double :station }
-    it 'should return true' do
-      subject.top_up(2)
-      subject.touch_in(station)
-      expect(subject.in_journey?). to be true
-    end
 
-    it 'should return false' do
-      subject.touch_out(station)
-      expect(subject.in_journey?).to be false
+  context 'subject is in journey' do
+    describe '#in_journey' do
+      before {
+        subject.top_up(2)
+        subject.touch_in(station)
+      }
+      it 'should return true' do
+        expect(subject.in_journey?). to be true
+      end
+
+      it 'should return false' do
+        subject.touch_out(station)
+        expect(subject.in_journey?).to be false
+      end
     end
   end
 end
