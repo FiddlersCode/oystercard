@@ -1,4 +1,5 @@
 require_relative 'oystercard'
+require_relative 'journey'
 
 class Station
 attr_reader :name, :zone
