@@ -4,6 +4,9 @@ describe Oystercard do
   let(:station) { double :station }
   let(:exit_station) { double :station }
   let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
+  #let(:journeys){ journeys:journeys }
+
+
 
 
   describe '#balance' do
@@ -22,6 +25,8 @@ describe Oystercard do
     end
   end
 
+
+
   context 'subjecting is touching in' do
     before {
       subject.top_up(10)
@@ -37,7 +42,7 @@ describe Oystercard do
         expect { card2.touch_in(station) }.to raise_error "You don't have enough money on your card"
       end
 
-      it 'stores entry/exit stations in a hash' do
+      it 'stores the last entry/exit stations in a hash' do
         expect(subject.journey).to include {:journey}
       end
     end
@@ -64,6 +69,14 @@ describe Oystercard do
       end
 
     end
+    it 'shows the entire journey history' do
+      subject.touch_in(station)
+      subject.touch_out(station)
+      expect(subject.journeys.length).to eq 2
+
+
+    end
+
   end
 
   context 'subject is in journey' do
