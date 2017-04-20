@@ -37,10 +37,6 @@ describe Oystercard do
         expect { card2.touch_in(station) }.to raise_error "You don't have enough money on your card"
       end
 
-      it 'stores the entry station' do
-        expect(subject.entry_station).to eq station
-      end
-
       it 'stores entry/exit stations in a hash' do
         expect(subject.journey).to include {:journey}
       end
@@ -61,10 +57,6 @@ describe Oystercard do
 
       it 'deducts correct amount after touch_out' do
         expect { subject.touch_out(station) }.to change { subject.balance }.by(-Oystercard::MINIMUM_CHARGE)
-      end
-
-      it 'resets the in entry_station to nil' do
-        expect(subject.entry_station). to eq nil
       end
 
       it 'stores the exit station' do
