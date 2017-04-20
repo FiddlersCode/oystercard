@@ -25,6 +25,7 @@ class Oystercard
     @balance -= 1
     @entry_station = nil
     @exit_station = station
+    @journey.store(:exit_station, station)
     true
   end
 
