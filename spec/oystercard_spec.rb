@@ -54,6 +54,12 @@ describe Oystercard do
       subject.touch_out(station)
       expect(subject.entry_station). to eq nil
     end
+
+    let(:exit_station) { double :station }
+    it 'stores the exit station' do
+      subject.touch_out(station)
+      expect(subject.exit_station).to eq station
+    end
   end
 
   describe '#in_journey' do
