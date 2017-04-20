@@ -1,3 +1,5 @@
+require_relative 'station'
+
 class Oystercard
   attr_reader :balance, :exit_station, :journey, :journeys
   MAX_VALUE = 90
