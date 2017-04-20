@@ -4,6 +4,7 @@ describe Oystercard do
   let(:station) { double :station }
   let(:exit_station) { double :station }
 
+
   describe '#balance' do
     it 'tests that an instance of Oystercard has a balance of zero' do
       expect(subject.balance).to eq 0
@@ -37,6 +38,11 @@ describe Oystercard do
 
       it 'stores the entry station' do
         expect(subject.entry_station).to eq station
+      end
+
+      let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
+      it 'stores the entry station in a hash' do
+        expect(subject.journey).to include {:journey}
       end
     end
   end
