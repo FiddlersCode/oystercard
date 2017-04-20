@@ -9,17 +9,17 @@ class Oystercard
   end
 
   def top_up(amount)
-    fail "Max balance £#{MAX_VALUE}" if @balance + amount > MAX_VALUE
+    raise "Max balance £#{MAX_VALUE}" if @balance + amount > MAX_VALUE
     @balance += amount
   end
 
   def touch_in(station)
-    fail "You don't have enough money on your card" if @balance < MINIMUM_BALANCE
+    raise "You don't have enough money on your card" if @balance < MINIMUM_BALANCE
     @entry_station = station
     true
   end
 
-  def touch_out
+  def touch_out(station)
     @balance -= 1
     @entry_station = nil
     true
@@ -34,5 +34,4 @@ class Oystercard
   def deduct(fare)
     @balance -= fare
   end
-
 end
