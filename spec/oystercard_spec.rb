@@ -2,12 +2,7 @@ require 'oystercard'
 
 describe Oystercard do
   let(:station) { double :station }
-  let(:exit_station) { double :station }
-  let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
-  #let(:journeys){ journeys:journeys }
-
-
-
+  let(:journey){ {entry_station: station, exit_station: station} }
 
   describe '#balance' do
     it 'tests that an instance of Oystercard has a balance of zero' do
@@ -24,7 +19,6 @@ describe Oystercard do
       expect { card.top_up(Oystercard::MAX_VALUE + 1) }.to raise_error "Max balance £#{Oystercard::MAX_VALUE}"
     end
   end
-
 
 
   context 'subjecting is touching in' do
@@ -69,13 +63,16 @@ describe Oystercard do
       end
 
     end
-    it 'shows the entire journey history' do
+
+      it 'shows that the last journey has been added' do
+      expect(subject.journeys.last).to eq journey
+      end
+
+      it 'checks if it added an extra journey'do
       subject.touch_in(station)
       subject.touch_out(station)
       expect(subject.journeys.length).to eq 2
-
-
-    end
+      end
 
   end
 
